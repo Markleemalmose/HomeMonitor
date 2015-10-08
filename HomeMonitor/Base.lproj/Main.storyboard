@@ -1,25 +1,417 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="woO-Fs-ZLM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Weatherstation-->
+        <scene sceneID="s52-lD-grv">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jLV-Xs-7ns" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="TDU-LU-zbk"/>
+                        <viewControllerLayoutGuide type="bottom" id="ibl-4S-MuA"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="hwh-R5-PJm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="weather_edit" translatesAutoresizingMaskIntoConstraints="NO" id="iDD-mb-8Va">
+                                <rect key="frame" x="0.0" y="28" width="375" height="204"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="375" height="204"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="83 Thermometer Three Quarter Full" translatesAutoresizingMaskIntoConstraints="NO" id="rHx-3w-J5U">
+                                <rect key="frame" x="20" y="240" width="30" height="30"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="276" width="30" height="30"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="63 Raindrop" translatesAutoresizingMaskIntoConstraints="NO" id="Xkl-xM-dYU">
+                                <rect key="frame" x="20" y="278" width="30" height="30"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="314" width="30" height="30"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-Mc-GpI">
+                                <rect key="frame" x="58" y="244" width="98" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="58" y="280" width="98" height="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHe-go-hrl">
+                                <rect key="frame" x="58" y="282" width="69" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="58" y="318" width="69" height="21"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="96 Air Sock" translatesAutoresizingMaskIntoConstraints="NO" id="sHB-g5-RIX">
+                                <rect key="frame" x="20" y="354" width="30" height="30"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="390" width="30" height="30"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="wind speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIO-aG-jur">
+                                <rect key="frame" x="58" y="358" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="58" y="394" width="88" height="21"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="90 Compass" translatesAutoresizingMaskIntoConstraints="NO" id="AkY-tX-hcg">
+                                <rect key="frame" x="20" y="316" width="30" height="30"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="352" width="30" height="30"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wind direction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nvf-U4-AYg">
+                                <rect key="frame" x="58" y="320" width="111" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="58" y="356" width="111" height="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="item two" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wme-sl-1XG">
+                                <rect key="frame" x="142" y="323" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="wme-sl-1XG"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Weatherstation" id="dYh-Qr-kMB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vbs-gT-wWX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305.75" y="806.5"/>
+        </scene>
+        <!--Floorplan-->
+        <scene sceneID="Rtf-IG-6uV">
+            <objects>
+                <viewController title="Floorplan" id="f6s-G7-qs7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pkg-Aj-KUB"/>
+                        <viewControllerLayoutGuide type="bottom" id="XhL-6k-Pkq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FbN-fr-hAP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smB-Af-ayR">
+                                <rect key="frame" x="20" y="61" width="247" height="131"/>
+                                <state key="normal" title="Button" image="x238"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="2" y="64" width="125" height="145"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="pgp-Jb-Lyk" kind="show" id="kXP-ys-jjM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfV-rt-Fe8">
+                                <rect key="frame" x="134" y="61" width="106" height="131"/>
+                                <state key="normal" title="Button" image="x239"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="127" y="64" width="83" height="145"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="pgp-Jb-Lyk" kind="show" id="pin-Zc-klq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2o-5j-b0N">
+                                <rect key="frame" x="259" y="61" width="106" height="131"/>
+                                <state key="normal" title="Button" image="x235"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="289" y="208" width="84" height="145"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="pgp-Jb-Lyk" kind="show" id="5d3-Eo-VDR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnZ-3X-1vy">
+                                <rect key="frame" x="147" y="452" width="68" height="83"/>
+                                <state key="normal" title="Button" image="x233"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="125" y="208" width="82" height="145"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="pgp-Jb-Lyk" kind="show" id="8FM-vg-IuH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYj-4I-Nfp">
+                                <rect key="frame" x="280" y="459" width="65" height="81"/>
+                                <state key="normal" title="Button" image="x234"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="207" y="208" width="83" height="145"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="pgp-Jb-Lyk" kind="show" id="0Nl-LB-kLm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMO-YS-dfe">
+                                <rect key="frame" x="0.0" y="276" width="247" height="131"/>
+                                <state key="normal" title="Button" image="x232"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="2" y="208" width="123" height="145"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="wNw-7A-Eap" kind="show" id="lCm-Wa-eoF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKN-HS-hlS">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Button" image="x240"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="210" y="64" width="163" height="144"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="pgp-Jb-Lyk" kind="show" id="ZLJ-XE-f8Z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="eKN-HS-hlS"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="eKN-HS-hlS"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Floorplan" id="1Ta-dD-XQo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QyH-5G-6Zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305.75" y="20.5"/>
+        </scene>
+        <!--No Sensors Implemented-->
+        <scene sceneID="a2w-Hf-3KO">
+            <objects>
+                <viewController title="No Sensors Implemented" id="pgp-Jb-Lyk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CbW-g3-xd3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jya-XY-sbP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JK0-Q3-szQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No sensors implemented" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2b-f3-m03">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J2b-f3-m03" firstAttribute="top" secondItem="CbW-g3-xd3" secondAttribute="bottom" constant="259" id="4OR-Qw-IbW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="J2b-f3-m03" secondAttribute="trailing" id="6eO-Af-UFj"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="J2b-f3-m03" secondAttribute="leading" id="o74-Zh-NLv"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="J2b-f3-m03"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="4OR-Qw-IbW"/>
+                                <exclude reference="6eO-Af-UFj"/>
+                                <exclude reference="o74-Zh-NLv"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="J2b-f3-m03"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="4OR-Qw-IbW"/>
+                                <include reference="6eO-Af-UFj"/>
+                                <include reference="o74-Zh-NLv"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gnm-za-uDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2378.25" y="-527.5"/>
+        </scene>
+        <!--Statistics-->
+        <scene sceneID="aZd-fP-nwi">
+            <objects>
+                <viewController title="Statistics" id="0wi-ZK-mHB" customClass="ThingspeakViewController" customModule="HomeMonitor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XMz-E4-vVn"/>
+                        <viewControllerLayoutGuide type="bottom" id="pEo-3e-fEP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mA7-Bz-44L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aAu-yl-tOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4134.75" y="232.5"/>
+        </scene>
+        <!--Room X2.32-->
+        <scene sceneID="OlL-Xn-DgD">
+            <objects>
+                <viewController title="Room X2.32" id="wNw-7A-Eap" customClass="RoomViewController" customModule="HomeMonitor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zbh-jc-Voc"/>
+                        <viewControllerLayoutGuide type="bottom" id="6YQ-kU-NdT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pKZ-UB-IWy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hFs-k1-jFw">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="375" height="378"/>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJU-ha-078">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Statistics"/>
+                                <connections>
+                                    <segue destination="0wi-ZK-mHB" kind="show" id="2Gj-iI-16v"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cJU-ha-078" firstAttribute="leading" secondItem="pKZ-UB-IWy" secondAttribute="leadingMargin" constant="135" id="HWS-gL-eIh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cJU-ha-078" secondAttribute="trailing" constant="136" id="Jin-Cr-24n"/>
+                            <constraint firstItem="cJU-ha-078" firstAttribute="top" secondItem="zbh-jc-Voc" secondAttribute="bottom" constant="386" id="mVX-d1-07W"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="hFs-k1-jFw"/>
+                                <exclude reference="cJU-ha-078"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="HWS-gL-eIh"/>
+                                <exclude reference="Jin-Cr-24n"/>
+                                <exclude reference="mVX-d1-07W"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="hFs-k1-jFw"/>
+                                <include reference="cJU-ha-078"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="HWS-gL-eIh"/>
+                                <include reference="Jin-Cr-24n"/>
+                                <include reference="mVX-d1-07W"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="roomImageView" destination="hFs-k1-jFw" id="mBg-Lb-nIz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sI5-wY-ejr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3258.75" y="232.5"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="QTp-dd-vch">
+            <objects>
+                <tabBarController id="woO-Fs-ZLM" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="vcM-01-fC9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="xWD-za-yNd" kind="relationship" relationship="viewControllers" id="DUn-eI-6hR"/>
+                        <segue destination="RxN-Po-Mmk" kind="relationship" relationship="viewControllers" id="YLj-JA-uNe"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jlk-uT-thf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-393" y="351"/>
+        </scene>
+        <!--Room-->
+        <scene sceneID="EAN-6q-Cay">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xWD-za-yNd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Room" image="home-7" id="jCa-33-TFP"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PV1-jg-2iJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="f6s-G7-qs7" kind="relationship" relationship="rootViewController" id="Y0C-fY-BLL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s8s-o5-fat" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="425.25" y="20.5"/>
+        </scene>
+        <!--Weather-->
+        <scene sceneID="5wQ-Im-kdt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RxN-Po-Mmk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Weather" image="bright-7" id="YI2-lT-gh2"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="15C-Fx-a0e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jLV-Xs-7ns" kind="relationship" relationship="rootViewController" id="qFW-5M-IQT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="el3-6Y-gt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="425.25" y="806.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="63 Raindrop" width="64" height="64"/>
+        <image name="83 Thermometer Three Quarter Full" width="64" height="64"/>
+        <image name="90 Compass" width="64" height="64"/>
+        <image name="96 Air Sock" width="64" height="64"/>
+        <image name="bright-7" width="14" height="15"/>
+        <image name="home-7" width="15" height="15"/>
+        <image name="weather_edit" width="500" height="312"/>
+        <image name="x232" width="123" height="145"/>
+        <image name="x233" width="82" height="145"/>
+        <image name="x234" width="83" height="145"/>
+        <image name="x235" width="84" height="145"/>
+        <image name="x238" width="125" height="144"/>
+        <image name="x239" width="83" height="144"/>
+        <image name="x240" width="166" height="144"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="pin-Zc-klq"/>
+    </inferredMetricsTieBreakers>
 </document>

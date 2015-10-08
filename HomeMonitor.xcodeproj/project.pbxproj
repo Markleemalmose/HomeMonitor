@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4255D0C1BC468F600EF61A4 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F4255D0E1BC6750100EF61A4 /* ViewControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D0D1BC6750100EF61A4 /* ViewControllerUtils.swift */; settings = {ASSET_TAGS = (); }; };
+		F4255D111BC67C0E00EF61A4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4255D0F1BC67C0E00EF61A4 /* Model.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		F4E077931BBB0D50006A2929 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077921BBB0D50006A2929 /* AppDelegate.swift */; };
 		F4E077951BBB0D50006A2929 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077941BBB0D50006A2929 /* ViewController.swift */; };
 		F4E077981BBB0D50006A2929 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E077961BBB0D50006A2929 /* Main.storyboard */; };
-		F4E0779A1BBB0D50006A2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E077991BBB0D50006A2929 /* Assets.xcassets */; };
 		F4E0779D1BBB0D50006A2929 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E0779B1BBB0D50006A2929 /* LaunchScreen.storyboard */; };
 		F4E077A81BBB0D50006A2929 /* HomeMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077A71BBB0D50006A2929 /* HomeMonitorTests.swift */; };
 		F4E077B31BBB0D50006A2929 /* HomeMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077B21BBB0D50006A2929 /* HomeMonitorUITests.swift */; };
+		F4E078081BBD61F8006A2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E078071BBD61F8006A2929 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		F4E0780A1BC15F14006A2929 /* ThingspeakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,11 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		F4255D0D1BC6750100EF61A4 /* ViewControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUtils.swift; sourceTree = "<group>"; };
+		F4255D101BC67C0E00EF61A4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		F4E0778F1BBB0D50006A2929 /* HomeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E077921BBB0D50006A2929 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4E077941BBB0D50006A2929 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F4E077971BBB0D50006A2929 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F4E077991BBB0D50006A2929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4E0779C1BBB0D50006A2929 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4E0779E1BBB0D50006A2929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4E077A31BBB0D50006A2929 /* HomeMonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +53,8 @@
 		F4E077AE1BBB0D50006A2929 /* HomeMonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E077B21BBB0D50006A2929 /* HomeMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMonitorUITests.swift; sourceTree = "<group>"; };
 		F4E077B41BBB0D50006A2929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4E078071BBD61F8006A2929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = HomeMonitor/Assets.xcassets; sourceTree = "<group>"; };
+		F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThingspeakViewController.swift; path = ../ThingspeakViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				F4E077911BBB0D50006A2929 /* HomeMonitor */,
+				F4E078071BBD61F8006A2929 /* Assets.xcassets */,
 				F4E077A61BBB0D50006A2929 /* HomeMonitorTests */,
 				F4E077B11BBB0D50006A2929 /* HomeMonitorUITests */,
 				F4E077901BBB0D50006A2929 /* Products */,
@@ -99,10 +108,13 @@
 			children = (
 				F4E077921BBB0D50006A2929 /* AppDelegate.swift */,
 				F4E077941BBB0D50006A2929 /* ViewController.swift */,
+				F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */,
 				F4E077961BBB0D50006A2929 /* Main.storyboard */,
-				F4E077991BBB0D50006A2929 /* Assets.xcassets */,
 				F4E0779B1BBB0D50006A2929 /* LaunchScreen.storyboard */,
 				F4E0779E1BBB0D50006A2929 /* Info.plist */,
+				F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */,
+				F4255D0D1BC6750100EF61A4 /* ViewControllerUtils.swift */,
+				F4255D0F1BC67C0E00EF61A4 /* Model.xcdatamodeld */,
 			);
 			path = HomeMonitor;
 			sourceTree = "<group>";
@@ -229,7 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4E0779D1BBB0D50006A2929 /* LaunchScreen.storyboard in Resources */,
-				F4E0779A1BBB0D50006A2929 /* Assets.xcassets in Resources */,
+				F4E078081BBD61F8006A2929 /* Assets.xcassets in Resources */,
 				F4E077981BBB0D50006A2929 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +268,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4E077951BBB0D50006A2929 /* ViewController.swift in Sources */,
+				F4E0780A1BC15F14006A2929 /* ThingspeakViewController.swift in Sources */,
 				F4E077931BBB0D50006A2929 /* AppDelegate.swift in Sources */,
+				F4255D0C1BC468F600EF61A4 /* RoomViewController.swift in Sources */,
+				F4255D0E1BC6750100EF61A4 /* ViewControllerUtils.swift in Sources */,
+				F4255D111BC67C0E00EF61A4 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +497,7 @@
 				F4E077B91BBB0D50006A2929 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4E077BA1BBB0D50006A2929 /* Build configuration list for PBXNativeTarget "HomeMonitorTests" */ = {
 			isa = XCConfigurationList;
@@ -489,6 +506,7 @@
 				F4E077BC1BBB0D50006A2929 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4E077BD1BBB0D50006A2929 /* Build configuration list for PBXNativeTarget "HomeMonitorUITests" */ = {
 			isa = XCConfigurationList;
@@ -497,8 +515,22 @@
 				F4E077BF1BBB0D50006A2929 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F4255D0F1BC67C0E00EF61A4 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F4255D101BC67C0E00EF61A4 /* Model.xcdatamodel */,
+			);
+			currentVersion = F4255D101BC67C0E00EF61A4 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F4E077871BBB0D50006A2929 /* Project object */;
 }
