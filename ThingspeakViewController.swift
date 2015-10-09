@@ -2,11 +2,11 @@
 //  ThingspeakViewController.swift
 //  HomeMonitor
 //
-//  HTTP request from: https://medium.com/swift-programming/http-in-swift-693b3a7bf086
-//
 //  CFNetwork SSLHandshake failed (-9824) error solved by:
 //  http://stackoverflow.com/questions/30739473/nsurlsession-nsurlconnection-http-load-failed-on-ios-9/30748166#30748166
 //
+//
+//  http://stackoverflow.com/questions/26613971/coredata-warning-unable-to-load-class-named
 //
 //  Created by Mark Lee Malmose on 04/10/15.
 //  Copyright © 2015 Mark Lee Malmose. All rights reserved.
@@ -14,24 +14,43 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class ThingspeakViewController: UIViewController {
-
-    @IBOutlet weak var thingspeakView: UIWebView!
     
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var newHttpRequest = HttpRequestJson()
+    var feed: Feed!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
+        
+        
+        
+
+        
+        // Print it to the console
+        print(managedObjectContext)
+        
         //ViewControllerUtils().showActivityIndicator(self.view)
 
-        // Do any additional setup after loading the view.
-        HTTPGetJSON("https://api.thingspeak.com/channels/56570/feeds.json?api_key=0PODIGLG2371U0B3") {
+        
+        newHttpRequest.HTTPGetJSON("https://api.thingspeak.com/channels/56570/feeds.json?api_key=0PODIGLG2371U0B3") {
             (data: Dictionary<String, AnyObject>, error: String?) -> Void in
             if error != nil {
                 print(error)
             } else {
-
+                
+                
+                let newEntity = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: self.managedObjectContext) as! Feed
+                
+                
                 if let feeds = data["feeds"] as? NSArray{
                     for elem: AnyObject in feeds{
                         
@@ -39,22 +58,36 @@ class ThingspeakViewController: UIViewController {
                         if let created_at = elem as? NSDictionary ,
                             let created_at_stamp = created_at["created_at"] as? String{
                                 print(created_at_stamp)
+                                newEntity.created_at = created_at_stamp
                         }
                         
                         if let entry_id = elem as? NSDictionary ,
                             let entry_idValue = entry_id["entry_id"] as? Int{
                                 print(entry_idValue)
+                                newEntity.entry_id = entry_idValue
                         }
                         
-                        if let field6 = elem as? NSDictionary ,
-                            let field6Value = field6["field6"] as? String{
-                            print(field6Value)
+                        if let solarCellBattery = elem as? NSDictionary ,
+                            let solarCellBatteryValue = solarCellBattery["field6"] as? String{
+                            print(solarCellBatteryValue)
+                                newEntity.battery = solarCellBatteryValue
+                                
                         }
                         
-                        if let field7 = elem as? NSDictionary ,
-                            let field7Value = field7["field7"] as? String{
-                            print(field7Value)
+                        if let lux = elem as? NSDictionary ,
+                            let luxValue = lux["field7"] as? String{
+                            print(luxValue)
                             print("\n")
+                                
+                                newEntity.lux = luxValue
+                        }
+                        
+                        
+                        do {
+                            try self.managedObjectContext.save()
+                        } catch {
+                            // Do something in response to error condition
+                            print("Error in saving to database")
                         }
                         
                     }
@@ -69,75 +102,44 @@ class ThingspeakViewController: UIViewController {
         
         //sleep(5)
     }
+    
+//    override func viewDidAppear(animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        // Create a new fetch request using the Feed entity
+//        let fetchRequest = NSFetchRequest(entityName: "Feed")
+//        
+//        
+//        do {
+//            let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Feed]
+//            // Do something with fetchedEntities
+//            
+//            // Create an Alert, and set it's message
+//            let alert = UIAlertController(title: fetchResults[0].created_at,
+//                message: fetchResults[0].lux,
+//                preferredStyle: .Alert)
+//            
+//            // Display the alert
+//            self.presentViewController(alert,
+//                animated: true,
+//                completion: nil)
+//            
+//        } catch {
+//            // Do something in response to error condition
+//        }
+//    
+//        
+//
+//}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Save data to database
     
-    
-    // MARK: - HTTPrequest
-    
-    
-    
-    func JSONParseDict(jsonString:String) -> Dictionary<String, AnyObject> {
-        
-        if let data: NSData = jsonString.dataUsingEncoding(
-            NSUTF8StringEncoding){
-                
-                do{
-                    if let jsonObj = try NSJSONSerialization.JSONObjectWithData(
-                        data,
-                        options: NSJSONReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>{
-                            return jsonObj
-                    }
-                }catch{
-                    print("Error")
-                }
-        }
-        return [String: AnyObject]()
-    }
-    
-    func HTTPsendRequest(request: NSMutableURLRequest,
-        callback: (String, String?) -> Void) {
-            
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(
-                request, completionHandler :
-                {
-                    data, response, error in
-                    if error != nil {
-                        callback("", (error!.localizedDescription) as String)
-                    } else {
-                        callback(
-                            NSString(data: data!, encoding: NSUTF8StringEncoding) as! String,
-                            nil
-                        )
-                    }
-            })
-            
-            task.resume()
-            
-    }
-    
-    func HTTPGetJSON(
-        url: String,
-        callback: (Dictionary<String, AnyObject>, String?) -> Void) {
-            
-            let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            HTTPsendRequest(request) {
-                (data: String, error: String?) -> Void in
-                if error != nil {
-                    callback(Dictionary<String, AnyObject>(), error)
-                } else {
-                    let jsonObj = self.JSONParseDict(data)
-                    callback(jsonObj, nil)
-                }
-            }
-    }
-    
-    
+
     /*
     // MARK: - Navigation
 
