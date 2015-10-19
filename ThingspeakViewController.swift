@@ -27,14 +27,6 @@ class ThingspeakViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
-        
-        
-        
-
-        
         // Print it to the console
         print(managedObjectContext)
         
@@ -47,6 +39,8 @@ class ThingspeakViewController: UIViewController {
                 print(error)
             } else {
                 
+                print("HTTP request GET")
+                
                 
                 let newEntity = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: self.managedObjectContext) as! Feed
                 
@@ -54,32 +48,31 @@ class ThingspeakViewController: UIViewController {
                 if let feeds = data["feeds"] as? NSArray{
                     for elem: AnyObject in feeds{
                         
+                        print("Feed")
                         
                         if let created_at = elem as? NSDictionary ,
                             let created_at_stamp = created_at["created_at"] as? String{
-                                print(created_at_stamp)
-                                newEntity.created_at = created_at_stamp
+                            print(created_at_stamp)
+                            newEntity.created_at = created_at_stamp
                         }
                         
                         if let entry_id = elem as? NSDictionary ,
                             let entry_idValue = entry_id["entry_id"] as? Int{
-                                print(entry_idValue)
-                                newEntity.entry_id = entry_idValue
+                            print(entry_idValue)
+                            newEntity.entry_id = entry_idValue
                         }
                         
                         if let solarCellBattery = elem as? NSDictionary ,
                             let solarCellBatteryValue = solarCellBattery["field6"] as? String{
                             print(solarCellBatteryValue)
-                                newEntity.battery = solarCellBatteryValue
-                                
+                            newEntity.battery = solarCellBatteryValue
                         }
                         
                         if let lux = elem as? NSDictionary ,
                             let luxValue = lux["field7"] as? String{
                             print(luxValue)
                             print("\n")
-                                
-                                newEntity.lux = luxValue
+                            newEntity.lux = luxValue
                         }
                         
                         
