@@ -23,15 +23,42 @@ class ThingspeakViewController: UIViewController {
     
     var newHttpRequest = HttpRequestJson()
     var feed: Feed!
+    var lastEntryId: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Create a new fetch request using the Feed entity
+        let fetchRequest = NSFetchRequest(entityName: "Feed")
+        
+        // Fetch only one record
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "entry_id", ascending: false)]
+        fetchRequest.fetchLimit = 1
+        
+        
+        do {
+            
+            let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest)
+            
+            let lastEntry = fetchResults[0] as! NSManagedObject
+            
+            lastEntryId = lastEntry.valueForKey("entry_id") as! Int
+            
+            print("Last entry: \(lastEntryId)")
+            
+        } catch {
+            
+            print("Could not fetch")
+        }
+        
+        
         
         // Print it to the console
         print(managedObjectContext)
         
         //ViewControllerUtils().showActivityIndicator(self.view)
-
+        // Use optional binding to confirm the managedObjectContext
+        let moc = self.managedObjectContext
         
         newHttpRequest.HTTPGetJSON("https://api.thingspeak.com/channels/56570/feeds.json?api_key=0PODIGLG2371U0B3") {
             (data: Dictionary<String, AnyObject>, error: String?) -> Void in
@@ -41,39 +68,44 @@ class ThingspeakViewController: UIViewController {
                 
                 print("HTTP request GET")
                 
-                
-                let newEntity = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: self.managedObjectContext) as! Feed
-                
-                
                 if let feeds = data["feeds"] as? NSArray{
                     for elem: AnyObject in feeds{
                         
-                        print("Feed")
-                        
-                        if let created_at = elem as? NSDictionary ,
-                            let created_at_stamp = created_at["created_at"] as? String{
-                            print(created_at_stamp)
-                            newEntity.created_at = created_at_stamp
-                        }
-                        
                         if let entry_id = elem as? NSDictionary ,
                             let entry_idValue = entry_id["entry_id"] as? Int{
+                            
+                                if entry_idValue > self.lastEntryId {
+                                
                             print(entry_idValue)
-                            newEntity.entry_id = entry_idValue
+
+                        
+                            if let created_at = elem as? NSDictionary ,
+                                let created_at_stamp = created_at["created_at"] as? String{
+                                print(created_at_stamp)
+                       
+                                    if let solarCellBattery = elem as? NSDictionary ,
+                                        let solarCellBatteryValue = solarCellBattery["field6"] as? String{
+                                        print(solarCellBatteryValue)
+                                        
+                                        if let lux = elem as? NSDictionary ,
+                                            let luxValue = lux["field7"] as? String{
+                                            print(luxValue)
+                                            print("\n")
+
+                                            Feed.createInManagedObjectContext(moc, lux: luxValue, entry_id: entry_idValue, created_at: created_at_stamp, battery: solarCellBatteryValue)
+                                                }
+                                        }
+                                        
+                                }
+                                }
                         }
                         
-                        if let solarCellBattery = elem as? NSDictionary ,
-                            let solarCellBatteryValue = solarCellBattery["field6"] as? String{
-                            print(solarCellBatteryValue)
-                            newEntity.battery = solarCellBatteryValue
-                        }
                         
-                        if let lux = elem as? NSDictionary ,
-                            let luxValue = lux["field7"] as? String{
-                            print(luxValue)
-                            print("\n")
-                            newEntity.lux = luxValue
-                        }
+                        
+                        
+                        
+                        
+                        
                         
                         
                         do {
