@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F4255D0C1BC468F600EF61A4 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F4255D0E1BC6750100EF61A4 /* ViewControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D0D1BC6750100EF61A4 /* ViewControllerUtils.swift */; settings = {ASSET_TAGS = (); }; };
-		F4255D111BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4255D0F1BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		F4255D131BC698CC00EF61A4 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D121BC698CC00EF61A4 /* HTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
 		F4255D291BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D271BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		F4255D2A1BC6B43E00EF61A4 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D281BC6B43E00EF61A4 /* Feed.swift */; settings = {ASSET_TAGS = (); }; };
@@ -21,6 +20,7 @@
 		F4E077B31BBB0D50006A2929 /* HomeMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077B21BBB0D50006A2929 /* HomeMonitorUITests.swift */; };
 		F4E078081BBD61F8006A2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E078071BBD61F8006A2929 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		F4E0780A1BC15F14006A2929 /* ThingspeakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F4F7317E1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4F7317C1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,6 @@
 /* Begin PBXFileReference section */
 		F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		F4255D0D1BC6750100EF61A4 /* ViewControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUtils.swift; sourceTree = "<group>"; };
-		F4255D101BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HomeMonitor.Feed.xcdatamodel; sourceTree = "<group>"; };
 		F4255D121BC698CC00EF61A4 /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		F4255D1A1BC6B06A00EF61A4 /* HomeMonitor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeMonitor-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4255D271BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -62,6 +61,7 @@
 		F4E077B41BBB0D50006A2929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4E078071BBD61F8006A2929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = HomeMonitor/Assets.xcassets; sourceTree = "<group>"; };
 		F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThingspeakViewController.swift; path = ../ThingspeakViewController.swift; sourceTree = "<group>"; };
+		F4F7317D1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HomeMonitor.Feed.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,13 +117,13 @@
 			children = (
 				F4E077921BBB0D50006A2929 /* AppDelegate.swift */,
 				F4E077941BBB0D50006A2929 /* ViewController.swift */,
+				F4F7317C1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld */,
 				F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */,
 				F4E077961BBB0D50006A2929 /* Main.storyboard */,
 				F4E0779B1BBB0D50006A2929 /* LaunchScreen.storyboard */,
 				F4E0779E1BBB0D50006A2929 /* Info.plist */,
 				F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */,
 				F4255D0D1BC6750100EF61A4 /* ViewControllerUtils.swift */,
-				F4255D0F1BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodeld */,
 				F4255D121BC698CC00EF61A4 /* HTTPRequest.swift */,
 				F4255D1A1BC6B06A00EF61A4 /* HomeMonitor-Bridging-Header.h */,
 			);
@@ -281,12 +281,12 @@
 			files = (
 				F4E077951BBB0D50006A2929 /* ViewController.swift in Sources */,
 				F4255D2A1BC6B43E00EF61A4 /* Feed.swift in Sources */,
+				F4F7317E1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld in Sources */,
 				F4E0780A1BC15F14006A2929 /* ThingspeakViewController.swift in Sources */,
 				F4E077931BBB0D50006A2929 /* AppDelegate.swift in Sources */,
 				F4255D0C1BC468F600EF61A4 /* RoomViewController.swift in Sources */,
 				F4255D131BC698CC00EF61A4 /* HTTPRequest.swift in Sources */,
 				F4255D0E1BC6750100EF61A4 /* ViewControllerUtils.swift in Sources */,
-				F4255D111BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodeld in Sources */,
 				F4255D291BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,12 +540,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F4255D0F1BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodeld */ = {
+		F4F7317C1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F4255D101BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodel */,
+				F4F7317D1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodel */,
 			);
-			currentVersion = F4255D101BC67C0E00EF61A4 /* HomeMonitor.Feed.xcdatamodel */;
+			currentVersion = F4F7317D1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodel */;
 			path = HomeMonitor.Feed.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

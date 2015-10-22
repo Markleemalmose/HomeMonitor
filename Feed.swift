@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(Feed)
+//@objc(Feed)
 class Feed: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass

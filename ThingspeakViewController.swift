@@ -24,6 +24,7 @@ class ThingspeakViewController: UIViewController {
     var newHttpRequest = HttpRequestJson()
     var feed: Feed!
     var lastEntryId: Int = 0
+    var dataRecords = [Feed]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +53,7 @@ class ThingspeakViewController: UIViewController {
         }
         
         
-        
-        // Print it to the console
-        print(managedObjectContext)
+//        print(managedObjectContext)
         
         //ViewControllerUtils().showActivityIndicator(self.view)
         // Use optional binding to confirm the managedObjectContext
@@ -73,90 +72,92 @@ class ThingspeakViewController: UIViewController {
                         
                         if let entry_id = elem as? NSDictionary ,
                             let entry_idValue = entry_id["entry_id"] as? Int{
-                            
-                                if entry_idValue > self.lastEntryId {
                                 
-                            print(entry_idValue)
-
-                        
-                            if let created_at = elem as? NSDictionary ,
-                                let created_at_stamp = created_at["created_at"] as? String{
-                                print(created_at_stamp)
-                       
-                                    if let solarCellBattery = elem as? NSDictionary ,
-                                        let solarCellBatteryValue = solarCellBattery["field6"] as? String{
-                                        print(solarCellBatteryValue)
-                                        
-                                        if let lux = elem as? NSDictionary ,
-                                            let luxValue = lux["field7"] as? String{
-                                            print(luxValue)
-                                            print("\n")
-
-                                            Feed.createInManagedObjectContext(moc, lux: luxValue, entry_id: entry_idValue, created_at: created_at_stamp, battery: solarCellBatteryValue)
-                                                }
-                                        }
-                                        
-                                }
+                                if entry_idValue > self.lastEntryId {
+                                    
+//                                    print(entry_idValue)
+                                    
+                                    if let created_at = elem as? NSDictionary ,
+                                        let created_at_stamp = created_at["created_at"] as? String{
+//                                            print(created_at_stamp)
+                                            
+                                            if let solarCellBattery = elem as? NSDictionary ,
+                                                let solarCellBatteryValue = solarCellBattery["field6"] as? String{
+//                                                    print(solarCellBatteryValue)
+                                                    
+                                                    if let lux = elem as? NSDictionary ,
+                                                        let luxValue = lux["field7"] as? String{
+//                                                            print(luxValue)
+//                                                            print("\n")
+                                                            
+                    Feed.createInManagedObjectContext(moc, lux: luxValue, entry_id: entry_idValue, created_at: created_at_stamp, battery: solarCellBatteryValue)
+                                                    }
+                                            }
+                                    }
                                 }
                         }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+                   
                         do {
                             try self.managedObjectContext.save()
                         } catch {
-                            // Do something in response to error condition
                             print("Error in saving to database")
                         }
-                        
                     }
-                    
                 }
-            //ViewControllerUtils().hideActivityIndicator(self.view)
+                //ViewControllerUtils().hideActivityIndicator(self.view)
+            }
+        } // End of HTTP request
+        
+        getDataFromDatabase(10)
+        
+        
+    }   // End of viewDidLoad
+    
+    
+    func getDataFromDatabase(numberOfRecords: Int){
+        
+        // Create a new fetch request using the Feed entity
+        let fetchRequest = NSFetchRequest(entityName: "Feed")
+        
+        // Fetch only one record
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "entry_id", ascending: false)]
+        fetchRequest.fetchLimit = numberOfRecords
+        
+        
+        do {
+
+            dataRecords = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Feed]
+            
+            for dataRecord in dataRecords {
+                
+                if let entry_id_value = dataRecord.entry_id {
+                    print("Entry id: \(entry_id_value)")
+                }
+                
+                if let created_at_value = dataRecord.created_at {
+                    print("Created at: \(created_at_value)")
+                }
+                
+                if let battery_value = dataRecord.battery {
+                    print("Battery id: \(battery_value)")
+                }
+                
+                if let lux_value = dataRecord.lux {
+                    print("Lux: \(lux_value)")
+                }
+                
             }
             
+        } catch {
             
+            print("Could not fetch")
         }
-        
-        
-        //sleep(5)
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(animated)
-//        
-//        // Create a new fetch request using the Feed entity
-//        let fetchRequest = NSFetchRequest(entityName: "Feed")
-//        
-//        
-//        do {
-//            let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Feed]
-//            // Do something with fetchedEntities
-//            
-//            // Create an Alert, and set it's message
-//            let alert = UIAlertController(title: fetchResults[0].created_at,
-//                message: fetchResults[0].lux,
-//                preferredStyle: .Alert)
-//            
-//            // Display the alert
-//            self.presentViewController(alert,
-//                animated: true,
-//                completion: nil)
-//            
-//        } catch {
-//            // Do something in response to error condition
-//        }
-//    
-//        
-//
-//}
-
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -164,15 +165,15 @@ class ThingspeakViewController: UIViewController {
     
     // MARK: - Save data to database
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
