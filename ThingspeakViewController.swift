@@ -15,8 +15,15 @@
 import UIKit
 import Foundation
 import CoreData
+import Charts
 
-class ThingspeakViewController: UIViewController {
+class ThingspeakViewController: UIViewController, ChartViewDelegate {
+    
+//    @IBOutlet weak var lineChartView: LineChartView!
+    @IBOutlet weak var graphDataLabel: UILabel!
+    
+    @IBOutlet weak var lineChartView: LineChartView!
+    @IBOutlet weak var lineChartViewBottom: LineChartView!
     
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -26,8 +33,16 @@ class ThingspeakViewController: UIViewController {
     var lastEntryId: Int = 0
     var dataRecords = [Feed]()
     
+    var createdAtToChart: [String] = []
+    var batteryToChart: [Double] = []
+    var luxToChart: [Double] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        lineChartView.delegate = self
+        lineChartViewBottom.delegate = self
+        
+        
         
         // Create a new fetch request using the Feed entity
         let fetchRequest = NSFetchRequest(entityName: "Feed")
@@ -41,11 +56,12 @@ class ThingspeakViewController: UIViewController {
             
             let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest)
             
-            let lastEntry = fetchResults[0] as! NSManagedObject
+            if let lastEntry = fetchResults.first as! NSManagedObject? {
             
             lastEntryId = lastEntry.valueForKey("entry_id") as! Int
             
             print("Last entry: \(lastEntryId)")
+            }
             
         } catch {
             
@@ -90,7 +106,11 @@ class ThingspeakViewController: UIViewController {
 //                                                            print(luxValue)
 //                                                            print("\n")
                                                             
-                    Feed.createInManagedObjectContext(moc, lux: luxValue, entry_id: entry_idValue, created_at: created_at_stamp, battery: solarCellBatteryValue)
+                    Feed.createInManagedObjectContext(moc,
+                        lux: luxValue,
+                        entry_id: entry_idValue,
+                        created_at: created_at_stamp,
+                        battery: solarCellBatteryValue)
                                                     }
                                             }
                                     }
@@ -108,8 +128,15 @@ class ThingspeakViewController: UIViewController {
             }
         } // End of HTTP request
         
-        getDataFromDatabase(10)
+        print("Getting data from database...")
         
+        
+        
+        getDataFromDatabase(5760)  // 24 timer a 15 sek
+        
+        setChartTop(createdAtToChart, values: batteryToChart)
+        
+        setChartBottom(createdAtToChart, values: luxToChart)
         
     }   // End of viewDidLoad
     
@@ -120,7 +147,7 @@ class ThingspeakViewController: UIViewController {
         let fetchRequest = NSFetchRequest(entityName: "Feed")
         
         // Fetch only one record
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "entry_id", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "entry_id", ascending: true)]
         fetchRequest.fetchLimit = numberOfRecords
         
         
@@ -136,14 +163,30 @@ class ThingspeakViewController: UIViewController {
                 
                 if let created_at_value = dataRecord.created_at {
                     print("Created at: \(created_at_value)")
+
+                    // create dateFormatter with UTC time format
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                    dateFormatter.timeZone = NSTimeZone(name: "Europe/Copenhagen")
+                    let date = dateFormatter.dateFromString(created_at_value)
+                    
+                    // change to a readable time format and change to local time zone
+                    dateFormatter.dateFormat = "dd.MM 'kl.' HH:mm:ss"
+                    let timeStamp = dateFormatter.stringFromDate(date!)
+                    
+//                    print(timeStamp)
+                    createdAtToChart.append(timeStamp)
                 }
                 
                 if let battery_value = dataRecord.battery {
                     print("Battery id: \(battery_value)")
+                    batteryToChart.append(NSString(string: battery_value).doubleValue)
+
                 }
                 
                 if let lux_value = dataRecord.lux {
                     print("Lux: \(lux_value)")
+                    luxToChart.append(NSString(string: lux_value).doubleValue)
                 }
                 
             }
@@ -154,9 +197,96 @@ class ThingspeakViewController: UIViewController {
         }
     }
     
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        print("\(entry.value) in \(createdAtToChart[entry.xIndex])")
+        
+        graphDataLabel.text = "\(round(1000*entry.value)/1000) in \(createdAtToChart[entry.xIndex])"
+    }
+    
+    // Top Chart
+    func setChartTop(dataPoints: [String], values: [Double]) {
+        lineChartView.noDataText = "You need to provide data for the chart."
+        lineChartView.descriptionText = "State of battery charge"
+        lineChartView.xAxis.enabled = true
+        lineChartView.rightAxis.enabled = false
+        lineChartView.drawGridBackgroundEnabled = true
+        lineChartView.drawBordersEnabled = true
+        lineChartView.borderColor = UIColor(red: 0.408, green: 0.537, blue: 0.749, alpha: 1.0)
+        lineChartView.backgroundColor = UIColor(red: 0.965, green: 0.965, blue: 0.965, alpha: 1.0)
+        lineChartView.leftAxis.startAtZeroEnabled = false
+        lineChartView.leftAxis.customAxisMin = 2500
+        lineChartView.leftAxis.customAxisMax = 3000
+        lineChartView.xAxis.labelPosition = .Bottom
+        
+        
+        var dataEntries: [ChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count {
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
+        
+//        let limitline = ChartLimitLine(limit: 2700.0, label: "Target")
+//        lineChartView.rightAxis.addLimitLine(limitline)
+        
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "Battery [mV]")
+        
+        //lineChartDataSet.circleRadius = 2.0
+        lineChartDataSet.drawCirclesEnabled = false
+        lineChartDataSet.drawCubicEnabled = true
+        lineChartDataSet.cubicIntensity = 0.5
+        lineChartDataSet.lineWidth = 1.8
+        lineChartDataSet.setColor(UIColor(red: 0.008, green: 0.165, blue: 0.533, alpha: 1.0))
+        
+        
+        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
+        lineChartView.data = lineChartData
+        lineChartData.setDrawValues(false)
+    
+        
+    }
     
     
-    
+    // Bottom Chart
+    func setChartBottom(dataPoints: [String], values: [Double]) {
+        lineChartViewBottom.noDataText = "You need to provide data for the chart."
+        lineChartViewBottom.descriptionText = "Illuminance in the room"
+        lineChartViewBottom.xAxis.enabled = true
+        lineChartViewBottom.rightAxis.enabled = false
+        lineChartViewBottom.drawGridBackgroundEnabled = true
+        lineChartViewBottom.drawBordersEnabled = true
+        lineChartViewBottom.borderColor = UIColor(red: 0.408, green: 0.537, blue: 0.749, alpha: 1.0)
+        lineChartViewBottom.backgroundColor = UIColor(red: 0.965, green: 0.965, blue: 0.965, alpha: 1.0)
+        lineChartViewBottom.xAxis.labelPosition = .Bottom
+        
+        
+        var dataEntries: [ChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count {
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
+        
+                let limitline = ChartLimitLine(limit: 10000.0, label: "Full daylight")
+                lineChartViewBottom.rightAxis.addLimitLine(limitline)
+        
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "Lux")
+        
+        //lineChartDataSet.circleRadius = 2.0
+        lineChartDataSet.drawCirclesEnabled = false
+        lineChartDataSet.drawCubicEnabled = true
+        lineChartDataSet.cubicIntensity = 0.5
+        lineChartDataSet.lineWidth = 1.8
+        lineChartDataSet.setColor(UIColor(red: 0.008, green: 0.165, blue: 0.533, alpha: 1.0))
+        
+        
+        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
+        lineChartViewBottom.data = lineChartData
+        lineChartData.setDrawValues(false)
+        
+        
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -12,6 +12,11 @@
 		F4255D131BC698CC00EF61A4 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D121BC698CC00EF61A4 /* HTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
 		F4255D291BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D271BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		F4255D2A1BC6B43E00EF61A4 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4255D281BC6B43E00EF61A4 /* Feed.swift */; settings = {ASSET_TAGS = (); }; };
+		F46646A51BDAA4F60001E0BC /* WeatherStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46646A41BDAA4F60001E0BC /* WeatherStationViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F46646AC1BDE555E0001E0BC /* WeatherStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46646AB1BDE555E0001E0BC /* WeatherStatsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F46646B21BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F46646B01BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		F46646B51BDE6D0D0001E0BC /* WeatherFeed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46646B31BDE6D0D0001E0BC /* WeatherFeed+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		F46646B61BDE6D0D0001E0BC /* WeatherFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46646B41BDE6D0D0001E0BC /* WeatherFeed.swift */; settings = {ASSET_TAGS = (); }; };
 		F4E077931BBB0D50006A2929 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077921BBB0D50006A2929 /* AppDelegate.swift */; };
 		F4E077951BBB0D50006A2929 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077941BBB0D50006A2929 /* ViewController.swift */; };
 		F4E077981BBB0D50006A2929 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E077961BBB0D50006A2929 /* Main.storyboard */; };
@@ -20,7 +25,8 @@
 		F4E077B31BBB0D50006A2929 /* HomeMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E077B21BBB0D50006A2929 /* HomeMonitorUITests.swift */; };
 		F4E078081BBD61F8006A2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E078071BBD61F8006A2929 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		F4E0780A1BC15F14006A2929 /* ThingspeakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F4F7317E1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4F7317C1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		F4F731881BD921DA00723A95 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F731851BD9218300723A95 /* Charts.framework */; };
+		F4F731891BD921DA00723A95 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4F731851BD9218300723A95 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +44,42 @@
 			remoteGlobalIDString = F4E0778E1BBB0D50006A2929;
 			remoteInfo = HomeMonitor;
 		};
+		F4F731841BD9218300723A95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4F7317F1BD9218300723A95 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
+			remoteInfo = Charts;
+		};
+		F4F731861BD9218300723A95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4F7317F1BD9218300723A95 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A52C5C371BAC5CA400594CDD;
+			remoteInfo = ChartsTV;
+		};
+		F4F7318A1BD921DA00723A95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4F7317F1BD9218300723A95 /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = Charts;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F4F7318C1BD921DA00723A95 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F4F731891BD921DA00723A95 /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +88,11 @@
 		F4255D1A1BC6B06A00EF61A4 /* HomeMonitor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeMonitor-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4255D271BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F4255D281BC6B43E00EF61A4 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		F46646A41BDAA4F60001E0BC /* WeatherStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherStationViewController.swift; path = ../WeatherStationViewController.swift; sourceTree = "<group>"; };
+		F46646AB1BDE555E0001E0BC /* WeatherStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStatsViewController.swift; sourceTree = "<group>"; };
+		F46646B11BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HomeMonitor.Feed.xcdatamodel; sourceTree = "<group>"; };
+		F46646B31BDE6D0D0001E0BC /* WeatherFeed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeatherFeed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F46646B41BDE6D0D0001E0BC /* WeatherFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherFeed.swift; sourceTree = "<group>"; };
 		F4E0778F1BBB0D50006A2929 /* HomeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E077921BBB0D50006A2929 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4E077941BBB0D50006A2929 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,7 +107,7 @@
 		F4E077B41BBB0D50006A2929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4E078071BBD61F8006A2929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = HomeMonitor/Assets.xcassets; sourceTree = "<group>"; };
 		F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThingspeakViewController.swift; path = ../ThingspeakViewController.swift; sourceTree = "<group>"; };
-		F4F7317D1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HomeMonitor.Feed.xcdatamodel; sourceTree = "<group>"; };
+		F4F7317F1BD9218300723A95 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F731881BD921DA00723A95 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,10 +139,13 @@
 		F4E077861BBB0D50006A2929 = {
 			isa = PBXGroup;
 			children = (
+				F46646B31BDE6D0D0001E0BC /* WeatherFeed+CoreDataProperties.swift */,
+				F46646B41BDE6D0D0001E0BC /* WeatherFeed.swift */,
 				F4255D271BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift */,
 				F4255D281BC6B43E00EF61A4 /* Feed.swift */,
 				F4E077911BBB0D50006A2929 /* HomeMonitor */,
 				F4E078071BBD61F8006A2929 /* Assets.xcassets */,
+				F4F7317F1BD9218300723A95 /* Charts.xcodeproj */,
 				F4E077A61BBB0D50006A2929 /* HomeMonitorTests */,
 				F4E077B11BBB0D50006A2929 /* HomeMonitorUITests */,
 				F4E077901BBB0D50006A2929 /* Products */,
@@ -117,15 +167,17 @@
 			children = (
 				F4E077921BBB0D50006A2929 /* AppDelegate.swift */,
 				F4E077941BBB0D50006A2929 /* ViewController.swift */,
-				F4F7317C1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld */,
+				F46646A41BDAA4F60001E0BC /* WeatherStationViewController.swift */,
+				F46646AB1BDE555E0001E0BC /* WeatherStatsViewController.swift */,
 				F4E078091BC15F14006A2929 /* ThingspeakViewController.swift */,
 				F4E077961BBB0D50006A2929 /* Main.storyboard */,
 				F4E0779B1BBB0D50006A2929 /* LaunchScreen.storyboard */,
-				F4E0779E1BBB0D50006A2929 /* Info.plist */,
 				F4255D0B1BC468F600EF61A4 /* RoomViewController.swift */,
 				F4255D0D1BC6750100EF61A4 /* ViewControllerUtils.swift */,
 				F4255D121BC698CC00EF61A4 /* HTTPRequest.swift */,
 				F4255D1A1BC6B06A00EF61A4 /* HomeMonitor-Bridging-Header.h */,
+				F4E0779E1BBB0D50006A2929 /* Info.plist */,
+				F46646B01BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodeld */,
 			);
 			path = HomeMonitor;
 			sourceTree = "<group>";
@@ -148,6 +200,15 @@
 			path = HomeMonitorUITests;
 			sourceTree = "<group>";
 		};
+		F4F731801BD9218300723A95 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4F731851BD9218300723A95 /* Charts.framework */,
+				F4F731871BD9218300723A95 /* ChartsTV.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,10 +219,12 @@
 				F4E0778B1BBB0D50006A2929 /* Sources */,
 				F4E0778C1BBB0D50006A2929 /* Frameworks */,
 				F4E0778D1BBB0D50006A2929 /* Resources */,
+				F4F7318C1BD921DA00723A95 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F4F7318B1BD921DA00723A95 /* PBXTargetDependency */,
 			);
 			name = HomeMonitor;
 			productName = HomeMonitor;
@@ -238,6 +301,12 @@
 			mainGroup = F4E077861BBB0D50006A2929;
 			productRefGroup = F4E077901BBB0D50006A2929 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F4F731801BD9218300723A95 /* Products */;
+					ProjectRef = F4F7317F1BD9218300723A95 /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F4E0778E1BBB0D50006A2929 /* HomeMonitor */,
@@ -246,6 +315,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F4F731851BD9218300723A95 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = F4F731841BD9218300723A95 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F4F731871BD9218300723A95 /* ChartsTV.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ChartsTV.framework;
+			remoteRef = F4F731861BD9218300723A95 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F4E0778D1BBB0D50006A2929 /* Resources */ = {
@@ -281,10 +367,14 @@
 			files = (
 				F4E077951BBB0D50006A2929 /* ViewController.swift in Sources */,
 				F4255D2A1BC6B43E00EF61A4 /* Feed.swift in Sources */,
-				F4F7317E1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld in Sources */,
+				F46646B51BDE6D0D0001E0BC /* WeatherFeed+CoreDataProperties.swift in Sources */,
 				F4E0780A1BC15F14006A2929 /* ThingspeakViewController.swift in Sources */,
+				F46646B61BDE6D0D0001E0BC /* WeatherFeed.swift in Sources */,
+				F46646A51BDAA4F60001E0BC /* WeatherStationViewController.swift in Sources */,
+				F46646B21BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodeld in Sources */,
 				F4E077931BBB0D50006A2929 /* AppDelegate.swift in Sources */,
 				F4255D0C1BC468F600EF61A4 /* RoomViewController.swift in Sources */,
+				F46646AC1BDE555E0001E0BC /* WeatherStatsViewController.swift in Sources */,
 				F4255D131BC698CC00EF61A4 /* HTTPRequest.swift in Sources */,
 				F4255D0E1BC6750100EF61A4 /* ViewControllerUtils.swift in Sources */,
 				F4255D291BC6B43E00EF61A4 /* Feed+CoreDataProperties.swift in Sources */,
@@ -319,6 +409,11 @@
 			isa = PBXTargetDependency;
 			target = F4E0778E1BBB0D50006A2929 /* HomeMonitor */;
 			targetProxy = F4E077AF1BBB0D50006A2929 /* PBXContainerItemProxy */;
+		};
+		F4F7318B1BD921DA00723A95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = F4F7318A1BD921DA00723A95 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -428,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = HomeMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LEE.HomeMonitor;
@@ -442,6 +538,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = HomeMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LEE.HomeMonitor;
@@ -540,12 +637,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F4F7317C1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodeld */ = {
+		F46646B01BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F4F7317D1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodel */,
+				F46646B11BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodel */,
 			);
-			currentVersion = F4F7317D1BD8E5A800723A95 /* HomeMonitor.Feed.xcdatamodel */;
+			currentVersion = F46646B11BDE6B570001E0BC /* HomeMonitor.Feed.xcdatamodel */;
 			path = HomeMonitor.Feed.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

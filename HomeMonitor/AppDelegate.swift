@@ -17,7 +17,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        let tabBarAppearance = UITabBar.appearance()
+        
+        navigationBarAppearace.tintColor = uicolorFromHex(0xd4d4d4)
+        navigationBarAppearace.barTintColor = uicolorFromHex(0x022a82)
+        
+        tabBarAppearance.tintColor = uicolorFromHex(0xd4d4d4)
+        tabBarAppearance.barTintColor = uicolorFromHex(0x022a82)
+        
+        // change navigation item title color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        
         return true
+    }
+    
+    func uicolorFromHex(rgbValue:UInt32)->UIColor{
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:1.0)
     }
 
     func applicationWillResignActive(application: UIApplication) {

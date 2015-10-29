@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HttpRequestJson {
     // MARK: - HTTPrequest
@@ -39,6 +40,9 @@ class HttpRequestJson {
                 request, completionHandler :
                 {
                     data, response, error in
+                    
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
+                    
                     if error != nil {
                         callback("", (error!.localizedDescription) as String)
                     } else {
@@ -49,6 +53,7 @@ class HttpRequestJson {
                     }
             })
             
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
             task.resume()
             
     }
