@@ -13,6 +13,12 @@ class RoomViewController: UIViewController {
     var newHttpRequest = HttpRequestJson()
 
     @IBOutlet weak var roomImageView: UIImageView!
+    @IBOutlet weak var thermImageView: UIImageView!
+    @IBOutlet weak var thermDataLabel: UILabel!
+    @IBOutlet weak var thermDegreeLabel: UILabel!
+    @IBOutlet weak var humImageView: UIImageView!
+    @IBOutlet weak var humDataLabel: UILabel!
+    @IBOutlet weak var humPercentLabel: UILabel!
     
     let image : UIImage = UIImage(named:"x232_map_iphone")!
     let imageWindowRight : UIImage = UIImage(named:"x232_map_iphone_window_1")!
@@ -92,6 +98,19 @@ class RoomViewController: UIViewController {
             print("Error in windows")
             
         }
+        
+        // Set the temperature and humidity labels, and views after room image is set
+        dispatch_async(dispatch_get_main_queue(), {
+            self.view.addSubview(self.thermImageView)
+            self.view.addSubview(self.thermDataLabel)
+            self.view.addSubview(self.thermDegreeLabel)
+            self.view.addSubview(self.humImageView)
+            self.view.addSubview(self.humDataLabel)
+            self.view.addSubview(self.humPercentLabel)
+            
+            
+            
+        })
     }
     
     

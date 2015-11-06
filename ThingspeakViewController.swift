@@ -53,14 +53,11 @@ class ThingspeakViewController: UIViewController, ChartViewDelegate {
         
         
         do {
-            
             let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest)
             
             if let lastEntry = fetchResults.first as! NSManagedObject? {
-            
-            lastEntryId = lastEntry.valueForKey("entry_id") as! Int
-            
-            print("Last entry: \(lastEntryId)")
+                lastEntryId = lastEntry.valueForKey("entry_id") as! Int
+                print("Last entry: \(lastEntryId)")
             }
             
         } catch {
@@ -74,51 +71,58 @@ class ThingspeakViewController: UIViewController, ChartViewDelegate {
         //ViewControllerUtils().showActivityIndicator(self.view)
         // Use optional binding to confirm the managedObjectContext
         let moc = self.managedObjectContext
-        
-        newHttpRequest.HTTPGetJSON("https://api.thingspeak.com/channels/56570/feeds.json?api_key=0PODIGLG2371U0B3") {
+        var dataThingspeakCount = 0
+        newHttpRequest.HTTPGetJSON("https://api.thingspeak.com/channels/56570/feeds.json?api_key=0PODIGLG2371U0B3?results=2541") {
             (data: Dictionary<String, AnyObject>, error: String?) -> Void in
             if error != nil {
                 print(error)
             } else {
                 
-                print("HTTP request GET")
+                print("Getting data from Thingspeak Room channel...")
                 
                 if let feeds = data["feeds"] as? NSArray{
                     for elem: AnyObject in feeds{
                         
-                        if let entry_id = elem as? NSDictionary ,
-                            let entry_idValue = entry_id["entry_id"] as? Int{
+                        if let
+                            entry_id        = elem as? NSDictionary,
+                            entry_idValue   = entry_id["entry_id"] as? Int{
                                 
-                                if entry_idValue > self.lastEntryId {
+                            if entry_idValue > self.lastEntryId {
+                                ++dataThingspeakCount
+//                              print("entry_idValue:  \(entry_idValue)")
+//                              print("lastEntryId:  \(self.lastEntryId)")
                                     
-//                                    print(entry_idValue)
-                                    
-                                    if let created_at = elem as? NSDictionary ,
-                                        let created_at_stamp = created_at["created_at"] as? String{
-//                                            print(created_at_stamp)
+                                if let
+                                    created_at          = elem as? NSDictionary,
+                                    created_at_stamp    = created_at["created_at"] as? String{
+//                                  print(created_at_stamp)
                                             
-                                            if let solarCellBattery = elem as? NSDictionary ,
-                                                let solarCellBatteryValue = solarCellBattery["field6"] as? String{
-//                                                    print(solarCellBatteryValue)
+                                    if let
+                                        solarCellBattery        = elem as? NSDictionary,
+                                        solarCellBatteryValue   = solarCellBattery["field6"] as? String{
+//                                      print(solarCellBatteryValue)
                                                     
-                                                    if let lux = elem as? NSDictionary ,
-                                                        let luxValue = lux["field7"] as? String{
-//                                                            print(luxValue)
-//                                                            print("\n")
+                                        if let
+                                            lux         = elem as? NSDictionary,
+                                            luxValue    = lux["field7"] as? String{
+//                                          print(luxValue)
+//                                          print("\n")
                                                             
-                    Feed.createInManagedObjectContext(moc,
-                        lux: luxValue,
-                        entry_id: entry_idValue,
-                        created_at: created_at_stamp,
-                        battery: solarCellBatteryValue)
-                                                    }
+                                            Feed.createInManagedObjectContext(moc,
+                                                lux:        luxValue,
+                                                entry_id:   entry_idValue,
+                                                created_at: created_at_stamp,
+                                                battery:    solarCellBatteryValue)
                                             }
+                                        }
                                     }
-                                }
+                            }
                         }
                    
                         do {
+                        
                             try self.managedObjectContext.save()
+
                         } catch {
                             print("Error in saving to database")
                         }
@@ -126,30 +130,36 @@ class ThingspeakViewController: UIViewController, ChartViewDelegate {
                 }
                 //ViewControllerUtils().hideActivityIndicator(self.view)
             }
+            
+            print("Done - Getting data from Thingspeak Room channel...")
+            print("Got \(dataThingspeakCount) json objects from Thingspeak")
+            dataThingspeakCount = 0
         } // End of HTTP request
         
-        print("Getting data from database...")
         
+        getDataFromDatabase(2541)  // 24 timer a 34 sek
         
-        
-        getDataFromDatabase(5760)  // 24 timer a 15 sek
-        
+        print("Updating charts")
+        print("Created at entries: \(createdAtToChart.count)")
         setChartTop(createdAtToChart, values: batteryToChart)
         
         setChartBottom(createdAtToChart, values: luxToChart)
-        
+
+        print("Done - Updating charts")
     }   // End of viewDidLoad
     
     
     func getDataFromDatabase(numberOfRecords: Int){
         
+        print("Getting data from database")
+        var dataCount = 0
+        
         // Create a new fetch request using the Feed entity
         let fetchRequest = NSFetchRequest(entityName: "Feed")
         
-        // Fetch only one record
+        // Fetch numberOfRecords
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "entry_id", ascending: true)]
         fetchRequest.fetchLimit = numberOfRecords
-        
         
         do {
 
@@ -157,35 +167,35 @@ class ThingspeakViewController: UIViewController, ChartViewDelegate {
             
             for dataRecord in dataRecords {
                 
-                if let entry_id_value = dataRecord.entry_id {
-                    print("Entry id: \(entry_id_value)")
-                }
+                ++dataCount // Count records from database
                 
                 if let created_at_value = dataRecord.created_at {
-                    print("Created at: \(created_at_value)")
+//                    print("Created at: \(created_at_value)")
 
-                    // create dateFormatter with UTC time format
+                    // create dateFormatter with GMT time format
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                    dateFormatter.timeZone = NSTimeZone(name: "Europe/Copenhagen")
-                    let date = dateFormatter.dateFromString(created_at_value)
+                    
+                    let dateGMT = dateFormatter.dateFromString(created_at_value)
                     
                     // change to a readable time format and change to local time zone
+                    let offsetFromGMT = 3600.0
+                    let dateCET = NSDate(timeInterval: offsetFromGMT, sinceDate: dateGMT!)
                     dateFormatter.dateFormat = "dd.MM 'kl.' HH:mm:ss"
-                    let timeStamp = dateFormatter.stringFromDate(date!)
+                    let timeStamp = dateFormatter.stringFromDate(dateCET)
                     
 //                    print(timeStamp)
                     createdAtToChart.append(timeStamp)
                 }
                 
                 if let battery_value = dataRecord.battery {
-                    print("Battery id: \(battery_value)")
+//                    print("Battery id: \(battery_value)")
                     batteryToChart.append(NSString(string: battery_value).doubleValue)
 
                 }
                 
                 if let lux_value = dataRecord.lux {
-                    print("Lux: \(lux_value)")
+//                    print("Lux: \(lux_value)")
                     luxToChart.append(NSString(string: lux_value).doubleValue)
                 }
                 
@@ -195,7 +205,12 @@ class ThingspeakViewController: UIViewController, ChartViewDelegate {
             
             print("Could not fetch")
         }
+        
+            print("Done - Getting data from database")
+            print("Got \(dataCount) records from database")
+            dataCount = 0
     }
+    
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         print("\(entry.value) in \(createdAtToChart[entry.xIndex])")

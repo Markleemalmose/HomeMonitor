@@ -50,12 +50,9 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
             let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest)
             
             if let lastEntry = fetchResults.first as! NSManagedObject? {
-                
                 lastEntryId = lastEntry.valueForKey("entry_id") as! Int
-                
                 print("Last entry: \(lastEntryId)")
-            }
-            
+            }     
             
         } catch {
             
@@ -68,59 +65,67 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
         //ViewControllerUtils().showActivityIndicator(self.view)
         // Use optional binding to confirm the managedObjectContext
         let moc = self.managedObjectContext
-        
-        newHttpRequest.HTTPGetJSON("https://api.thingspeak.com/channels/61952/feeds.json?api_key=ZBM1FGNSLEIZ4GSL") {
+        var dataThingspeakCount = 0
+        newHttpRequest.HTTPGetJSON("https://api.thingspeak.com/channels/61952/feeds.json?api_key=ZBM1FGNSLEIZ4GSL?results=2541") {
             (data: Dictionary<String, AnyObject>, error: String?) -> Void in
             if error != nil {
                 print(error)
             } else {
                 
-                print("HTTP request GET")
+                print("Getting data from Thingspeak Weatherstation channel...")
+//              print("lastEntryId:  \(self.lastEntryId)")
                 
                 if let feeds = data["feeds"] as? NSArray{
                     for elem: AnyObject in feeds{
                         
-                        if let entry_id = elem as? NSDictionary ,
-                            let entry_idValue = entry_id["entry_id"] as? Int{
+                    if let
+                        entry_id        = elem as? NSDictionary,
+                        entry_idValue   = entry_id["entry_id"] as? Int{
                                 
-                                if entry_idValue > self.lastEntryId {
-//                                    print(entry_idValue)
+                        if entry_idValue > self.lastEntryId {
+                            ++dataThingspeakCount
+//                          print("entry_idValue:  \(entry_idValue)")
+//                          print("lastEntryId:  \(self.lastEntryId)")
                                     
-                                    if let created_at = elem as? NSDictionary ,
-                                        let created_at_stamp = created_at["created_at"] as? String{
-//                                            print(created_at_stamp)
-                                            
-                                            if let windspeed = elem as? NSDictionary ,
-                                                let windspeedValue = windspeed["field1"] as? String{
-//                                                    print(windspeedValue)
+                            if let
+                                created_at          = elem as? NSDictionary,
+                                created_at_stamp    = created_at["created_at"] as? String{
+//                              print(created_at_stamp)
+                                        
+                                if let
+                                    windspeed       = elem as? NSDictionary,
+                                    windspeedValue  = windspeed["field1"] as? String{
+//                                  print(windspeedValue)
                                                     
-                                                    if let winddirection = elem as? NSDictionary ,
-                                                        let winddirectionValue = winddirection["field2"] as? String{
-//                                                            print(winddirectionValue)
+                                    if let
+                                        winddirection       = elem as? NSDictionary,
+                                        winddirectionValue  = winddirection["field2"] as? String{
+//                                      print(winddirectionValue)
                                                             
-                                                            if let temperature = elem as? NSDictionary ,
-                                                                let temperatureValue = temperature["field3"] as? String{
-//                                                                    print(temperatureValue)
+                                        if let
+                                            temperature         = elem as? NSDictionary,
+                                            temperatureValue    = temperature["field3"] as? String{
+//                                          print(temperatureValue)
                                                                     
-                                                                    if let humidity = elem as? NSDictionary ,
-                                                                        let humidityValue = humidity["field4"] as? String{
-//                                                                            print(humidityValue)
-//                                                                            print("\n")
+                                            if let
+                                                humidity = elem as? NSDictionary ,
+                                                humidityValue = humidity["field4"] as? String{
+//                                              print(humidityValue)
+//                                              print("\n")
                                                                             
-                                                                            WeatherFeed.createInManagedObjectContext(moc,
-                                                                                wind_speed: windspeedValue,
-                                                                                entry_id: entry_idValue,
-                                                                                created_at: created_at_stamp,
-                                                                                wind_direction: winddirectionValue,
-                                                                                temperature: temperatureValue,
-                                                                                humidity: humidityValue)
-                                                                    }
-                                                            }
-                                                            
-                                                    }
+                                                WeatherFeed.createInManagedObjectContext(moc,
+                                                    wind_speed: windspeedValue,
+                                                    entry_id: entry_idValue,
+                                                    created_at: created_at_stamp,
+                                                    wind_direction: winddirectionValue,
+                                                    temperature: temperatureValue,
+                                                    humidity: humidityValue)
+                                                }
                                             }
+                                        }
                                     }
                                 }
+                            }
                         }
                         
                         do {
@@ -132,21 +137,27 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
                 }
                 //ViewControllerUtils().hideActivityIndicator(self.view)
             }
+            print("Done - Getting data from Thingspeak Weatherstation channel...")
+            print("Got \(dataThingspeakCount) json objects from Thingspeak")
+            dataThingspeakCount = 0
         } // End of HTTP request
         
-        print("Getting data from database...")
         
-        getDataFromDatabase(5760)
+        getDataFromDatabase(2541)
         
-        
+        print("Updating charts")
+        print("Created at entries: \(createdAtToChart.count)")
         setChartTop(createdAtToChart, values: temperatureToChart)
         
         setChartBottom(createdAtToChart, values: humidityToChart)
+        print("Done - Updating charts")
         
     }   // End of viewDidLoad
     
     
     func getDataFromDatabase(numberOfRecords: Int){
+        print("Getting data from database")
+        var dataCount = 0
         
         // Create a new fetch request using the Feed entity
         let fetchRequest = NSFetchRequest(entityName: "WeatherFeed")
@@ -162,23 +173,23 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
             
             for dataRecord in dataRecords {
                 
-//                if let entry_id_value = dataRecord.entry_id {
-//                    print("Entry id: \(entry_id_value)")
-//                }
+                ++dataCount // Count records from database
                 
                 if let created_at_value = dataRecord.created_at {
 //                    print("Created at: \(created_at_value)")
                     
-                    // create dateFormatter with UTC time format
+                    // create dateFormatter with GMT time format
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-                    dateFormatter.timeZone = NSTimeZone(name: "Europe/Copenhagen")
-                    let date = dateFormatter.dateFromString(created_at_value)
+                    
+                    let dateGMT = dateFormatter.dateFromString(created_at_value)
                     
                     // change to a readable time format and change to local time zone
+                    let offsetFromGMT = 3600.0
+                    let dateCET = NSDate(timeInterval: offsetFromGMT, sinceDate: dateGMT!)
                     dateFormatter.dateFormat = "dd.MM 'kl.' HH:mm:ss"
-                    let timeStamp = dateFormatter.stringFromDate(date!)
-                    
+                    let timeStamp = dateFormatter.stringFromDate(dateCET)
+                
 //                    print(timeStamp)
                     createdAtToChart.append(timeStamp)
                 }
@@ -209,6 +220,9 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
             
             print("Could not fetch")
         }
+        print("Done - Getting data from database")
+        print("Got \(dataCount) records from database")
+        dataCount = 0
     }
     
     
@@ -228,7 +242,7 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
         weatherStatsView.borderColor = UIColor(red: 0.408, green: 0.537, blue: 0.749, alpha: 1.0)
         weatherStatsView.backgroundColor = UIColor(red: 0.965, green: 0.965, blue: 0.965, alpha: 1.0)
         weatherStatsView.leftAxis.startAtZeroEnabled = false
-        weatherStatsView.leftAxis.customAxisMin = 15
+        weatherStatsView.leftAxis.customAxisMin = -10
         weatherStatsView.leftAxis.customAxisMax = 30
         weatherStatsView.xAxis.labelPosition = .Bottom
         weatherStatsView.xAxis.drawGridLinesEnabled = true
