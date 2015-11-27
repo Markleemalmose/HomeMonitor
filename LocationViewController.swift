@@ -15,17 +15,11 @@ class LocationViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager.requestWhenInUseAuthorization()
         mapView.delegate = self
-        
-        
-        
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -45,7 +39,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate {
             CLLocationCoordinate2D(latitude: 55.731767, longitude: 12.393437)
         ]
         let boundaryPolygon = MKPolygon(coordinates: &dTUBoundaryCoordinates, count: dTUBoundaryCoordinates.count)
-        mapView.addOverlay(boundaryPolygon)
+            mapView.addOverlay(boundaryPolygon)
 
     }
     
@@ -60,23 +54,4 @@ class LocationViewController: UIViewController, MKMapViewDelegate {
         
         return MKOverlayRenderer()
     }
-    
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

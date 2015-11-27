@@ -14,18 +14,31 @@ import CoreData
 
 extension Feed {
 
-    @NSManaged var lux: String?
     @NSManaged var entry_id: NSNumber?
     @NSManaged var created_at: String?
-    @NSManaged var battery: String?
+    @NSManaged var luxInside: String?
+    @NSManaged var luxOutside: String?
+    @NSManaged var temperature: String?
+    @NSManaged var humidity: String?
     
-    class func createInManagedObjectContext(moc: NSManagedObjectContext, lux: String, entry_id: NSNumber, created_at: String, battery: String) -> Feed {
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: moc) as! Feed
-        newItem.lux = lux
-        newItem.entry_id = entry_id
-        newItem.created_at = created_at
-        newItem.battery = battery
+    class func createInManagedObjectContext(
+        moc: NSManagedObjectContext,
+        entry_id: NSNumber,
+        created_at: String,
+        luxInside: String,
+        luxOutside: String,
+        temperature: String,
+        humidity: String
+        ) -> Feed {
+            let newItem = NSEntityDescription.insertNewObjectForEntityForName("Feed", inManagedObjectContext: moc) as! Feed
         
+            newItem.entry_id = entry_id
+            newItem.created_at = created_at
+            newItem.luxInside = luxInside
+            newItem.luxOutside = luxOutside
+            newItem.temperature = temperature
+            newItem.humidity = humidity
+                    
         return newItem
     }
 

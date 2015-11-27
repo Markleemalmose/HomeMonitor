@@ -8,24 +8,16 @@
 
 import UIKit
 
-
-
 class WeatherStationViewController: UIViewController {
-    
     var newHttpRequest = HttpRequestJson()
-//    var temperatureCelsius = ""
-    
-    @IBOutlet weak var temperatureLabel: UILabel!
+
+    @IBOutlet weak var thermometerLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var winddirectionLabel: UILabel!
     @IBOutlet weak var windspeedLabel: UILabel!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-       // ViewControllerUtils().showActivityIndicator(self.view)
         
         // Get window status from thingspeak
         newHttpRequest.HTTPGetJSON("https://api.thingspeak.com/channels/61952/feeds/last.json?api_key=ZBM1FGNSLEIZ4GSL") {
@@ -34,17 +26,54 @@ class WeatherStationViewController: UIViewController {
                 print(error)
             } else {
                 
+                var windDirectionFormatted: String = ""
+
                 let temperature = (data["field3"] as? String)!
                 let humidity = (data["field4"] as? String)!
                 let windDirection = (data["field2"] as? String)!
                 let windSpeed = (data["field1"] as? String)!
                 
+                let WindDirectionInt:Int = Int(windDirection)!
+                
+                switch WindDirectionInt {
+                case 0..<23:
+                    windDirectionFormatted = "N"
+                    
+                case 23..<68:
+                    windDirectionFormatted = "NE"
+                    
+                case 68..<158:
+                    windDirectionFormatted = "SE"
+                    
+                case 158..<203:
+                    windDirectionFormatted = "S"
+                    
+                case 203..<247:
+                    windDirectionFormatted = "SW"
+                    
+                case 247..<292:
+                    windDirectionFormatted = "W"
+                    
+                    
+                case 292..<337:
+                    windDirectionFormatted = "NW"
+                    
+                    
+                case 337..<360:
+                    windDirectionFormatted = "N"
+                    
+                default:
+                    print("Error in formatting wind direction")
+                    
+                }
+
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     if let formatTemp:Float = Float(temperature)!{
                         let roundedTemp:String = String(Int(formatTemp))
-                        self.temperatureLabel.text = roundedTemp
+                        print("temp \(roundedTemp)")
+                        self.thermometerLabel.text = roundedTemp
                     }
                     
                     if let formatHum:Float = Float(humidity)!{
@@ -62,49 +91,15 @@ class WeatherStationViewController: UIViewController {
                         self.windspeedLabel.text = roundedSpeed
                     }
                     
-                    
-                    
+                    self.winddirectionLabel.text = windDirectionFormatted
                     
                 })
-               
+                
+                
+                               
             }
         }
-        //print("Temp \(self.temperature)")
-        
-        
-        
-        
-        
-        
-        
-        //        dispatch_async(dispatch_get_main_queue(), {
-//        self.temperatureLabel.text = self.temperature
-        //        })
-        
-        
-        
         
     } // END ViewDidLoad
-
-    func updateTemperatureLabel(temperature: String){
-        temperatureLabel.text = temperature
-        print(temperature)
-    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -187,7 +187,7 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
                     // change to a readable time format and change to local time zone
                     let offsetFromGMT = 3600.0
                     let dateCET = NSDate(timeInterval: offsetFromGMT, sinceDate: dateGMT!)
-                    dateFormatter.dateFormat = "dd.MM 'kl.' HH:mm:ss"
+                    dateFormatter.dateFormat = "dd. MMM 'at' HH:mm:ss"
                     let timeStamp = dateFormatter.stringFromDate(dateCET)
                 
 //                    print(timeStamp)
@@ -228,8 +228,10 @@ class WeatherStatsViewController: UIViewController, ChartViewDelegate {
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         print("\(entry.value) in \(createdAtToChart[entry.xIndex])")
-        graphDataLabel.text = "\(round(1000*entry.value)/1000) in \(createdAtToChart[entry.xIndex])"
+        graphDataLabel.text = "\(round(1000*entry.value)/1000) at \(createdAtToChart[entry.xIndex])"
     }
+    
+    
     
     // Top Chart
     func setChartTop(dataPoints: [String], values: [Double]) {

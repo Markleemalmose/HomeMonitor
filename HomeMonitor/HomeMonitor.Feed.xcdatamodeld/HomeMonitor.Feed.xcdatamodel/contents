@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
     <entity name="Entity" syncable="YES"/>
     <entity name="Feed" representedClassName=".Feed" syncable="YES">
-        <attribute name="battery" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="entry_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="lux" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="luxInside" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="luxOutside" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temperature" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="WeatherFeed" representedClassName=".WeatherFeed" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,8 +18,8 @@
         <attribute name="wind_speed" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Feed" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="WeatherFeed" positionX="-63" positionY="9" width="128" height="135"/>
         <element name="Entity" positionX="-54" positionY="54" width="128" height="45"/>
+        <element name="Feed" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="WeatherFeed" positionX="-63" positionY="9" width="128" height="135"/>
     </elements>
 </model>
